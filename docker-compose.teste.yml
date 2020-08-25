@@ -1,0 +1,29 @@
+version: '3.7'
+services:
+    meu_front:
+        image: node:latest
+        networks:
+            - rede_um
+        port:
+            - 80:3000
+        volumes:
+            - ./meu_flutter/src:/meu_front_flutter
+    meu_backend:
+        image: node:latest
+        networks:
+            - rede_um
+            - rede_dois
+        port:
+            - 81:3000
+        volumes:
+            - ./meu_back:/meu_back_express
+    meu_banco:
+        image: mongo:latest
+        networks:
+            - rede_dois
+        volumes:
+            - meu_banco_persistido:/data/db
+networks:
+    rede_um:
+    rede_dois: 
+        driver: overlay
