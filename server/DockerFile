@@ -1,0 +1,18 @@
+## Definindo qual imagem nós iremos usar
+FROM node:12
+
+# Definir onde será criado o projeto
+WORKDIR /usr/src/app
+
+# Intalar as dependências
+COPY package*.json ./
+
+RUN npm install
+
+## Agrupa o seu código dentro da imagem do docker
+COPY . .
+
+## Expor na porta 3333
+EXPOSE 3333
+
+CMD [ "node", "src/server.js" ]
